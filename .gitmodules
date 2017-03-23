@@ -1,0 +1,8 @@
+[submodule "roles/common/files/oh-my-zsh"]
+	path = roles/common/files/oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git
+	ignore = dirty
+[submodule "roles/openvswitch/files/ovs"]
+	path = roles/openvswitch/files/ovs
+	url = https://github.com/openvswitch/ovs.git
+	ignore = dirty

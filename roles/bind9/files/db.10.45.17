@@ -1,0 +1,20 @@
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	ns1.4516.cs.wpi.edu. root.4516.cs.wpi.edu. (
+			      7		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+;@	IN	NS	ns1.
+;4	IN	PTR	ns1.team17.4516.cs.wpi.edu.
+
+; name servers - NS records
+	IN	NS	ns1.4516.cs.wpi.edu.
+
+; PTR records
+10	IN	PTR	team17.4516.cs.wpi.edu.
+

@@ -1,0 +1,45 @@
+---
+- name: Remove old downloaded archive files
+  command: apt-get clean all
+
+- name: Backup current source list
+  command: mv /etc/apt/sources.list /etc/apt/sources.list-OLD
+  ignore_errors: yes
+
+- name: Copy new source list
+  copy:
+    src: sources.list
+    dest: /etc/apt/sources.list
+
+- name: Upgrade all packages to latest version
+  apt:
+    upgrade: dist
+
+- name: Remove old downloaded archive files
+  command: apt-get autoremove
+
+- name: Retrieve new lists of packages
+  apt:
+    update_cache: yes
+
+- name: Install zsh
+  apt:
+    name: zsh
+
+- name: Copy oh-my-zsh
+  synchronize:
+    src: oh-my-zsh/
+    dest: /home/{{ username }}/.oh-my-zsh
+  become_user: "{{ username }}"
+  become: no
+
+- name: Set zsh as default
+  shell: sudo chsh -s $(grep /zsh$ /etc/shells | tail -1)
+  become_user: "{{ username }}"
+
+- name: Copy preconfigured .zshrc
+  synchronize:
+    src: zshrc
+    dest: /home/{{ username }}/.zshrc
+  become_user: "{{ username }}"
+  become: no

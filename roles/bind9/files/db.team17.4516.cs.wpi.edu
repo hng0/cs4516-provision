@@ -1,0 +1,17 @@
+ND data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	ns1.4516.cs.wpi.edu. root.4516.cs.wpi.edu. (
+			     12		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+; name servers - NS records
+	IN	NS	ns1.4516.cs.wpi.edu.
+
+; name servers - A records
+ns1.4516.cs.wpi.edu.	IN	A	10.45.17.4
+
+; 10.45.17.0/24 - A records
+team17.4516.cs.wpi.edu.	IN	A	10.45.17.10

@@ -1,0 +1,19 @@
+---
+- name: Install ovs dependencies
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - git
+    - python-simplejson
+    - python-qt4
+    - python-twisted-conch
+    - automake
+    - autoconf
+    - gcc
+    - uml-utilities
+    - libtool
+    - build-essential
+    - pkg-config
+
+- name: Install linux headers
+  shell: apt-get install -y linux-headers-$(uname -r)

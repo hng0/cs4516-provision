@@ -1,0 +1,4 @@
+---
+- name: Install Apache web server
+  apt: pkg=apache2 state=installed
+  register: install-apache

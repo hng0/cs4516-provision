@@ -1,0 +1,7 @@
+---
+- name: Install bind9
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - bind9
+    - bind9utils
+    - bind9-doc

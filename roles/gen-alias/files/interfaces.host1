@@ -1,0 +1,20 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+up route add -net 10.45.17.128 netmask 255.255.255.128 gw 10.45.17.34
+down route del -net 10.45.17.128 netmask 255.255.255.128 gw 10.45.17.34
+
+auto eth0:1
+iface eth0:1 inet static
+name Ethernet alias LAN card
+address 10.45.17.33
+netmask 255.255.255.224
+broadcast 10.45.17.63
+network 10.45.17.32
+

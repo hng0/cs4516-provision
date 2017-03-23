@@ -1,0 +1,10 @@
+---
+- name: Copy interfaces file to VM
+  copy:
+    src: interfaces.{{ host_no }}
+    dest: /etc/network/interfaces
+  register: cpinterfaces
+
+- name: Restart networking service
+  when: cpinterfaces|success
+  service: name=networking state=reloaded

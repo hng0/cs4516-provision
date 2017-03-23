@@ -1,0 +1,28 @@
+---
+# Playbook to bootstrap configuration for machines in WPI secnet.
+# TODO
+# + install zsh
+# + install oh-my-zsh
+# + setup hostname
+# + alias
+- hosts: gateway
+  vars:
+    - username: cs4516
+    - host_no: host2
+  become: true
+  roles:
+    - common
+    - gen-alias
+    - openvswitch
+
+- hosts: webserver
+  vars:
+    - username: cs4516
+    - host_no: host3
+  roles:
+    - apache
+
+# - hosts: dns,honeypot,openflow_controller
+#   roles:
+#     - apache
+#     - bind9
