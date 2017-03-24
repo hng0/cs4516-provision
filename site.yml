@@ -9,7 +9,7 @@
   vars:
     - username: cs4516
     - host_no: host2
-  become: true
+  become: yes
   roles:
     - common
     - gen-alias
@@ -19,6 +19,17 @@
   vars:
     - username: cs4516
     - host_no: host3
+    - servername: "WEB SERVER"
+  become: yes
+  roles:
+    - apache
+
+- hosts: honeypot
+  vars:
+    - username: cs4516
+    - host_no: host4
+    - servername: "HONEYPOT SERVER"
+  become: yes
   roles:
     - apache
 

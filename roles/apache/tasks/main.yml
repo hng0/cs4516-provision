@@ -2,3 +2,8 @@
 - name: Install Apache web server
   apt: pkg=apache2 state=installed
   register: install-apache
+
+- name: Copy Apache landing page
+  template:
+    src: landingpage.j2
+    dest: /var/www/html/index.html
