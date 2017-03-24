@@ -1,0 +1,17 @@
+---
+- name: Install floodlight dependencies
+  apt:
+    name: {{ item }}
+  with_items:
+    - build-essential
+    - ant
+    - maven
+    - python-dev
+
+- name: Copy floodlight to server
+  synchronize:
+    src: fl
+    dest: "/home/{{ username }}/fl"
+  become_user: "{{ username }}"
+  become: no
+

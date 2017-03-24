@@ -33,6 +33,10 @@
   roles:
     - apache
 
+- hosts: openflow_controller
+  roles:
+    - floodlight
+
 # - hosts: dns,honeypot,openflow_controller
 #   roles:
 #     - apache

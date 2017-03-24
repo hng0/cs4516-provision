@@ -6,3 +6,7 @@
 	path = roles/openvswitch/files/ovs
 	url = https://github.com/openvswitch/ovs.git
 	ignore = dirty
+[submodule "roles/floodlight/files/fl"]
+	path = roles/floodlight/files/fl
+	url = https://github.com/floodlight/floodlight.git
+	ignore = dirty
