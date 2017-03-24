@@ -5,15 +5,26 @@
 # + install oh-my-zsh
 # + setup hostname
 # + alias
+#- hosts: client
+#  vars:
+#    - username: cs4516
+#    - host_no: host1
+#  roles:
+#    - common
+#    - gen-alias
+
 - hosts: gateway
   vars:
     - username: cs4516
     - host_no: host2
+    - controller_ip: 10.45.17.4 
   become: yes
   roles:
     - common
     - gen-alias
     - openvswitch
+  tags:
+    - debug
 
 - hosts: webserver
   vars:

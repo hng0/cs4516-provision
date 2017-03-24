@@ -17,3 +17,83 @@
 
 - name: Install linux headers
   shell: apt-get install -y linux-headers-$(uname -r)
+
+- name: Copy ovs source code
+  synchronize:
+    src: ovs
+    dest: "/home/{{ username }}"
+  become: no
+
+- name: Open vSwitch - Run boot.sh
+  command: ./boot.sh
+  args:
+    chdir: "/home/{{ username }}/ovs"
+  become: yes
+
+- name: Open vSwitch - Configure Open vSwitch
+  shell: ./configure --with-linux=/lib/modules/$(uname -r)/build
+  args:
+    chdir: "/home/{{ username }}/ovs"
+  become: yes
+
+- name: Open vSwitch - Build Open vSwitch
+  command: make
+  args:
+    chdir: "/home/{{ username }}/ovs"
+  become: yes
+
+- name: Open vSwitch - Build install
+  command: make install
+  args:
+    chdir: "/home/{{ username }}/ovs"
+  become: yes
+
+- name: Load openvswitch module into kernel
+  command: modprobe openvswitch
+  args:
+    chdir: "/home/{{ username }}/ovs/datapath/linux"
+
+- name: Create Open vSwitch configuration
+  file:
+    path: /usr/local/etc/ovs-vswitchd.conf
+    state: touch
+  become: yes
+
+- name: Create local Open vSwitch directory
+  file:
+    path: /usr/local/etc/openvswitch
+    state: directory
+  become: yes
+
+- name: Create Open vSwitch database for Flow table
+  command: ovsdb-tool create /usr/local/etc/openvswitch/conf.db vswitchd/vswitch.ovsschema
+  args:
+    chdir: "/home/{{ username }}/ovs"
+  become: yes
+
+- name: Setup/Create Open vSwitch server
+  command: >
+    ovsdb-server /usr/local/etc/openvswitch/conf.db \
+    --remote=punix:/usr/local/var/run/openvswitch/db.sock \
+    --remote=db:Open_vSwitch,Open_vSwitch,manager_options \
+    --pidfile --detach --log-file
+  become: yes
+
+- name: Initialze Open vSwitch database
+  command: ovs-vsctl --no-wait init
+  become: yes
+
+- name: Run Open vSwitch deamon in background
+  command: ovs-vswitchd --pidfile --detach
+  become: yes
+
+# Run the commands in shell script instead of ansible modules
+# because individual commands zero out the eth0 interface, isolating
+# the machine for a moment, preventing sequential commands from being run.
+- name: Connect physical interface to virtual bridge
+  script: physical-interface-2-virtual-bridge.sh
+  become: yes
+
+- name: Attach ovs to a controller
+  command: "ovs-vsctl set-controller br0 tcp:{{ controller_ip }}"
+  become: yes
