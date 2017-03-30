@@ -93,6 +93,7 @@
 - name: Connect physical interface to virtual bridge
   script: physical-interface-2-virtual-bridge.sh
   become: yes
+  ignore_errors: yes
 
 - name: Attach ovs to a controller
   command: "ovs-vsctl set-controller br0 tcp:{{ controller_ip }}"

@@ -5,6 +5,10 @@
     dest: /etc/network/interfaces
   register: cpinterfaces
 
-- name: Restart networking service
-  when: cpinterfaces|success
-  service: name=networking state=reloaded
+# TODO fail to run
+# - name: Restart networking service
+#   when: cpinterfaces|success
+#   shell: sudo /etc/init.d/networking restart
+#   become: yes
+#   become_user: "{{ username }}"
+#   ignore_errors: yes

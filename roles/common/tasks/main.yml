@@ -33,9 +33,10 @@
   become_user: "{{ username }}"
   become: no
 
-- name: Set zsh as default
-  shell: sudo chsh -s $(grep /zsh$ /etc/shells | tail -1)
-  become_user: "{{ username }}"
+#- name: Set zsh as default
+#  shell: sudo chsh -s $(grep /zsh$ /etc/shells | tail -1)
+#  become_user: "{{ username }}"
+#  become: yes
 
 - name: Copy preconfigured .zshrc
   synchronize:
