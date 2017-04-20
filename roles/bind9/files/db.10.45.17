@@ -16,5 +16,5 @@ $TTL	604800
 	IN	NS	ns1.4516.cs.wpi.edu.
 
 ; PTR records
-10	IN	PTR	team17.4516.cs.wpi.edu.
+3	IN	PTR	team17.4516.cs.wpi.edu.
 

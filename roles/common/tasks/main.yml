@@ -16,7 +16,9 @@
     upgrade: dist
 
 - name: Remove old downloaded archive files
-  command: apt-get autoremove
+  apt:
+    autoremove: yes
+  ignore_errors: yes
 
 - name: Retrieve new lists of packages
   apt:
@@ -32,6 +34,7 @@
     dest: /home/{{ username }}/.oh-my-zsh
   become_user: "{{ username }}"
   become: no
+  ignore_errors: yes
 
 #- name: Set zsh as default
 #  shell: sudo chsh -s $(grep /zsh$ /etc/shells | tail -1)

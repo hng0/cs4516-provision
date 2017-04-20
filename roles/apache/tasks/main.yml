@@ -4,6 +4,8 @@
   register: install_apache
 
 - name: Copy Apache landing page
+  become_user: root
+  become: yes
   when: install_apache | success
   template:
     src: landingpage.j2

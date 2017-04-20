@@ -1,14 +1,13 @@
 ---
-- name: Copy interfaces file to VM
-  copy:
-    src: interfaces.{{ host_no }}
-    dest: /etc/network/interfaces
+- name: Create IP alises {128..254}
+  become_user: root
+  become: yes
+  script: create-aliases.sh
   register: cpinterfaces
+  ignore_errors: yes
 
 # TODO fail to run
-# - name: Restart networking service
-#   when: cpinterfaces|success
-#   shell: sudo /etc/init.d/networking restart
-#   become: yes
-#   become_user: "{{ username }}"
-#   ignore_errors: yes
+- name: Restart networking service
+  when: cpinterfaces|success
+  service: name=networking state=restarted enabled=yes
+  ignore_errors: yes

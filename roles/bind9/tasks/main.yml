@@ -5,3 +5,27 @@
     - bind9
     - bind9utils
     - bind9-doc
+
+- name: Copy named.conf.local to /etc/bind
+  become_user: root
+  become: yes
+  copy:
+    src: named.conf.local
+    dest: /etc/bind
+
+- name: Copy zone file configuration for primary master server
+  become_user: root
+  become: yes
+  copy:
+    src: db.team17.4516.cs.wpi.edu
+    dest: /etc/bind
+
+- name: Copy reverse zone file configuration for primary master server
+  become_user: root
+  become: yes
+  copy:
+    src: db.10.45.17
+    dest: /etc/bind
+
+- name: Restart bind9
+  service: name=bind9 state=restarted enabled=yes

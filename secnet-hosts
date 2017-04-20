@@ -3,15 +3,13 @@ host1 ansible_host=10.45.17.1 ansible_user=cs4516
 
 [gateway]
 host2 ansible_host=10.45.17.2 ansible_user=cs4516 ansible_become_pass=huyhoang
+host3 ansible_host=10.45.17.3 ansible_user=cs4516 ansible_become_pass=huyhoang
 
 [webserver]
 host3 ansible_host=10.45.17.3 ansible_user=cs4516 ansible_become_pass=huyhoang
-
-[honeypot]
-host4 ansible_host=10.45.17.4 ansible_user=cs4516 ansible_become_pass=huyhoang
 
 [openflow_controller]
 host4 ansible_host=10.45.17.4 ansible_user=cs4516
 
 [dns]
-host4 ansible_host=10.45.17.4 ansible_user=cs4516
+host2 ansible_host=10.45.17.2 ansible_user=cs4516 ansible_become_pass=huyhoang
