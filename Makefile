@@ -1,6 +1,8 @@
 .PHONY: git-submodule-init-level-0 build-floodlight
 
-all: git-submodule-init-level-0 build-floodlight
+all: git-submodule-init-level-0 build-floodlight deploy
+
+deploy:
 	ansible-playbook -i secnet-hosts site.yml
 
 git-submodule-init-level-0:

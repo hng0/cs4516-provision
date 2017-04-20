@@ -7,9 +7,12 @@
   vars:
     - username: cs4516
     - host_no: host1
+    - controller_ip: 10.45.17.4
+  become: yes
   roles:
     - common
     - openvswitch
+    - dns-client-conf
 
 - hosts: gateway
   vars:
