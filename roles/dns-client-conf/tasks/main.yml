@@ -1,0 +1,15 @@
+- name: Add host2 as nameserver
+  become_user: root
+  become: yes
+  lineinfile:
+    dest: /etc/resolvconf/resolv.conf.d/head
+    regexp: ''
+    insertafter: EOF
+    line: 'nameserver 10.45.17.2'
+  register: add_host2_nameserver
+
+- name: Update nameserver list
+  become_user: root
+  become: yes
+  shell: resolvconf -u
+
